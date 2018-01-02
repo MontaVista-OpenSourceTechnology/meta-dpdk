@@ -96,6 +96,11 @@ do_compile () {
 	oe_runmake EXTRA_LDFLAGS="-L${STAGING_LIBDIR} --hash-style=gnu -fuse-ld=bfd" \
 		   EXTRA_CFLAGS="--sysroot=${STAGING_DIR_HOST} -I${STAGING_INCDIR}" \
 		   CROSS="${TARGET_PREFIX}" O="${S}/examples/$@/"
+
+	cd ${S}/test/
+	oe_runmake EXTRA_LDFLAGS="-L${STAGING_LIBDIR} --hash-style=gnu -fuse-ld=bfd" \
+		   EXTRA_CFLAGS="--sysroot=${STAGING_DIR_HOST} -I${STAGING_INCDIR}" \
+		   CROSS="${TARGET_PREFIX}" O="${S}/test/$@/"
 }
 
 do_install () {
@@ -113,9 +118,20 @@ do_install () {
 			install -m 755 ${appname}	${D}/${INSTALL_PATH}/examples/`basename ${dirname}`/
 		done
 	done
+
+	# Install test
+	for dirname in ${S}/test/app/*
+	do
+		install -m 0755 -d ${D}/${INSTALL_PATH}/test
+
+		for appname in `find ${dirname} -regex ".*test\/app\/[-0-9a-zA-Z0-9/_]*$"`
+		do
+			install -m 755 ${appname} ${D}/${INSTALL_PATH}/test
+		done
+	done
 }
 
-PACKAGES += "${PN}-examples"
+PACKAGES += "${PN}-examples ${PN}-test"
 
 FILES_${PN}-dbg += " \
 	${INSTALL_PATH}/.debug \
@@ -143,4 +159,8 @@ FILES_${PN} += " ${INSTALL_PATH}/usertools/ \
 		 "
 FILES_${PN}-examples += " \
 	${INSTALL_PATH}/examples/* \
+	"
+
+FILES_${PN}-test += " \
+	${INSTALL_PATH}/test \
 	"
