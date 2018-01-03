@@ -33,8 +33,8 @@ export CONFIG_EXAMPLE_DPDK_QAT = "${@bb.utils.contains('PACKAGECONFIG', 'dpdk_qa
 export CONFIG_EXAMPLE_VM_POWER_MANAGER = "${@bb.utils.contains('PACKAGECONFIG', 'libvirt', 'y', 'n', d)}"
 export CONFIG_VHOST_ENABLED = "${@bb.utils.contains('PACKAGECONFIG', 'vhost', 'y', 'n', d)}"
 
-RDEPENDS_${PN} += "python-subprocess dpdk-dev-libibverbs"
-DEPENDS = "virtual/kernel dpdk-dev-libibverbs"
+RDEPENDS_${PN} += "python-subprocess virtual/libibverbs"
+DEPENDS = "virtual/kernel virtual/libibverbs"
 do_configure[depends] += "virtual/kernel:do_shared_workdir"
 
 inherit module
