@@ -24,4 +24,7 @@ S = "${WORKDIR}/dpdk-dev-libibverbs-libibverbs-${PV}"
 COMPATIBLE_HOST = '(i.86|x86_64).*-linux'
 DEPENDS = "libnl"
 
+PROVIDES = "virtual/libibverbs"
+RPROVIDES_${PN} = "virtual/libibverbs"
+
 inherit pkgconfig autotools
