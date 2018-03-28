@@ -5,8 +5,8 @@ SRC_URI += "\
             file://0001-examples-Fix-maybe-uninitialized-warning.patch \
             "
 
-SRC_URI[dpdk.md5sum] = "39c4e1110dd1ef9dab33edbae820f939"
-SRC_URI[dpdk.sha256sum] = "763bfb7e1765efcc949e79d645dc9f1ebd16591431ba0db5ce22becd928dcd0a"
+SRC_URI[dpdk.md5sum] = "49d08ced0a978a71cc3942af5cf51b95"
+SRC_URI[dpdk.sha256sum] = "f1210310fd5f01a3babe3a09d9b3e5a9db791c2ec6ecfbf94ade9f893a0632b8"
 
 export EXAMPLES_BUILD_DIR = "${RTE_TARGET}"
 export ARCHDIR = "generic"

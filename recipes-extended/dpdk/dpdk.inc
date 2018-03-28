@@ -1,13 +1,14 @@
 DESCRIPTION = "Intel(r) Data Plane Development Kit"
 HOMEPAGE = "http://dpdk.org"
 LICENSE = "BSD & LGPLv2 & GPLv2"
-LIC_FILES_CHKSUM = "file://LICENSE.GPL;md5=751419260aa954499f7abaabaa882bbe"
+LIC_FILES_CHKSUM = "file://license/gpl-2.0.txt;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
+                    file://license/lgpl-2.1.txt;md5=4b54a1fd55a448865a0b32d41598759d \
+                    file://license/bsd-3-clause.txt;md5=0f00d99239d922ffd13cabef83b33444"
 
 SRC_URI = "http://fast.dpdk.org/rel/${BP}.tar.gz;name=dpdk \
 	   file://dpdk-16.04-add-RTE_KERNELDIR_OUT-to-split-kernel-bu.patch \
 	   file://dpdk-16.07-add-sysroot-option-within-app-makefile.patch \
 	   file://dpdk-16.04-Fix-for-misleading-indentation-error.patch \
-	   file://dpdk-16.04-dpdk-fix-compilation-with-dynamic-libs.patch \
 	   file://dpdk-16.07-dpdk-fix-for-parellel-make-issue.patch \
 	   file://dpdk-17.02-dpdk-fix-installation-warning-and-issue.patch \
 	  "
