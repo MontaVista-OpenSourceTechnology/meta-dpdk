@@ -29,10 +29,12 @@ COMPATIBLE_HOST_libc-musl_class-target = "null"
 PACKAGECONFIG[dpdk_qat] = ",,virtual/qat"
 PACKAGECONFIG[vhost] = ",,fuse"
 PACKAGECONFIG[libvirt] = ",,libvirt"
+PACKAGECONFIG[numa] = ",,numactl"
 
 export CONFIG_EXAMPLE_DPDK_QAT = "${@bb.utils.contains('PACKAGECONFIG', 'dpdk_qat', 'y', 'n', d)}"
 export CONFIG_EXAMPLE_VM_POWER_MANAGER = "${@bb.utils.contains('PACKAGECONFIG', 'libvirt', 'y', 'n', d)}"
 export CONFIG_VHOST_ENABLED = "${@bb.utils.contains('PACKAGECONFIG', 'vhost', 'y', 'n', d)}"
+export CONFIG_HAVE_NUMA = "${@bb.utils.contains('PACKAGECONFIG', 'numa', 'y', 'n', d)}"
 
 RDEPENDS_${PN} += "python-subprocess virtual/libibverbs"
 DEPENDS = "virtual/kernel virtual/libibverbs"
@@ -80,6 +82,8 @@ do_configure () {
 	sed -e "s#CONFIG_RTE_KNI_VHOST=n#CONFIG_RTE_KNI_VHOST=${CONFIG_VHOST_ENABLED}#" -i ${S}/config/common_linuxapp
 	sed -e "s#CONFIG_RTE_KNI_VHOST_VNET_HDR_EN=n#CONFIG_RTE_KNI_VHOST_VNET_HDR_EN=${CONFIG_VHOST_ENABLED}#" -i ${S}/config/common_linuxapp
 	sed -e "s#CONFIG_RTE_LIBRTE_VHOST=n#CONFIG_RTE_LIBRTE_VHOST=${CONFIG_VHOST_ENABLED}#" -i ${S}/config/common_linuxapp
+	sed -e "s#CONFIG_RTE_LIBRTE_VHOST_NUMA=.*#CONFIG_RTE_LIBRTE_VHOST_NUMA=${CONFIG_HAVE_NUMA}#" -i ${S}/config/common_linuxapp
+	sed -e "s#CONFIG_RTE_EAL_NUMA_AWARE_HUGEPAGES=.*#CONFIG_RTE_EAL_NUMA_AWARE_HUGEPAGES=${CONFIG_HAVE_NUMA}#" -i ${S}/config/common_linuxapp
 
 	make O=$RTE_TARGET T=$RTE_TARGET config
 }
