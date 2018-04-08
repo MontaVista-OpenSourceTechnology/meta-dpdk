@@ -1,4 +1,4 @@
-From 363817bf84286fc167e0c3c255a7fd522bf87d8c Mon Sep 17 00:00:00 2001
+From 0be350c3b04d83ea9182f45936ef3219aed5c0c1 Mon Sep 17 00:00:00 2001
 From: Shashwat Pandey <shashwatx.p@intel.com>
 Date: Mon, 20 Feb 2017 15:46:22 +0800
 Subject: [PATCH] dpdk: fix installation warning and issue
@@ -12,12 +12,13 @@ Added excluded files from bin and removing mk and app/dpdk-pmdinfogen files
 installation since it is not needed as a part of image.
 
 Signed-off-by: Shashwat Pandey <shashwatx.p@intel.com>
+
 ---
  mk/rte.sdkinstall.mk | 29 ++++++++++++++---------------
  1 file changed, 14 insertions(+), 15 deletions(-)
 
 diff --git a/mk/rte.sdkinstall.mk b/mk/rte.sdkinstall.mk
-index dbac2a2..563954e 100644
+index 4e97feff9fde..42625333a4e2 100644
 --- a/mk/rte.sdkinstall.mk
 +++ b/mk/rte.sdkinstall.mk
 @@ -115,16 +115,17 @@ endif
@@ -76,6 +77,3 @@ index dbac2a2..563954e 100644
  	$(Q)$(call rte_mkdir,         $(DESTDIR)$(datadir))
 -	$(Q)cp -a $(RTE_SDK)/examples $(DESTDIR)$(datadir)
 +	$(Q)cp -r $(RTE_SDK)/examples $(DESTDIR)$(datadir)
--- 
-1.9.1
-

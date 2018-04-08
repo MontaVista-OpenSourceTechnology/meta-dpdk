@@ -1,4 +1,4 @@
-From 6c8d348190a8cf6c35111913cbf117ca98137e84 Mon Sep 17 00:00:00 2001
+From 0808b30cd00f307f182007d21a8be3a0866ccf83 Mon Sep 17 00:00:00 2001
 From: Rahul Kumar Gupta <rahul.kumarxx.gupta@intel.com>
 Date: Fri, 18 Dec 2015 18:30:47 +0800
 Subject: [PATCH] dpdk v2.2.0: add RTE_KERNELDIR_OUT to split kernel build
@@ -12,15 +12,16 @@ separate directories for kernel source and kernel artifacts.
 Upstream-Status: Inappropriate [configuration]
 
 Signed-off-by: Rahul Kumar Gupta <rahul.kumarxx.gupta@intel.com>
+
 ---
  mk/rte.module.mk | 6 +++---
  1 file changed, 3 insertions(+), 3 deletions(-)
 
 diff --git a/mk/rte.module.mk b/mk/rte.module.mk
-index 53ed4fe..b7a014b 100644
+index 1ada528a00b1..da0538cd5321 100644
 --- a/mk/rte.module.mk
 +++ b/mk/rte.module.mk
-@@ -77,7 +77,7 @@ build: _postbuild
+@@ -48,7 +48,7 @@ build: _postbuild
  # build module
  $(MODULE).ko: $(SRCS_LINKS)
  	@if [ ! -f $(notdir Makefile) ]; then ln -nfs $(SRCDIR)/Makefile . ; fi
@@ -29,7 +30,7 @@ index 53ed4fe..b7a014b 100644
  		CC="$(KERNELCC)" CROSS_COMPILE=$(CROSS) V=$(if $V,1,0)
  
  # install module in $(RTE_OUTPUT)/kmod
-@@ -88,7 +88,7 @@ $(RTE_OUTPUT)/kmod/$(MODULE).ko: $(MODULE).ko
+@@ -59,7 +59,7 @@ $(RTE_OUTPUT)/kmod/$(MODULE).ko: $(MODULE).ko
  
  # install module
  modules_install:
@@ -38,7 +39,7 @@ index 53ed4fe..b7a014b 100644
  		modules_install
  
  .PHONY: clean
-@@ -98,7 +98,7 @@ clean: _postclean
+@@ -69,7 +69,7 @@ clean: _postclean
  .PHONY: doclean
  doclean:
  	@if [ ! -f $(notdir Makefile) ]; then ln -nfs $(SRCDIR)/Makefile . ; fi
@@ -47,6 +48,3 @@ index 53ed4fe..b7a014b 100644
  	@$(foreach FILE,$(SRCS-y) $(SRCS-n) $(SRCS-),\
  		if [ -h $(notdir $(FILE)) ]; then rm -f $(notdir $(FILE)) ; fi ;)
  	@if [ -h $(notdir Makefile) ]; then rm -f $(notdir Makefile) ; fi
--- 
-1.9.1
-
