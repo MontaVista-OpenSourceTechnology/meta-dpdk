@@ -4,7 +4,6 @@ HOMEPAGE = "http://dpdk.org"
 SRC_URI = "http://fast.dpdk.org/rel/${BP}.tar.gz;name=dpdk \
 	   file://dpdk-16.04-add-RTE_KERNELDIR_OUT-to-split-kernel-bu.patch \
 	   file://dpdk-16.07-add-sysroot-option-within-app-makefile.patch \
-	   file://dpdk-16.04-Fix-for-misleading-indentation-error.patch \
 	   file://dpdk-16.07-dpdk-fix-for-parellel-make-issue.patch \
 	   file://dpdk-17.02-dpdk-fix-installation-warning-and-issue.patch \
 	  "
