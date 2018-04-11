@@ -17,7 +17,7 @@ SRC_URI = "git://dpdk.org/dpdk${STABLE};branch=${BRANCH} \
 
 COMPATIBLE_MACHINE = "null"
 COMPATIBLE_HOST_libc-musl_class-target = "null"
-
+COMPATIBLE_HOST_linux-gnux32 = "null"
 
 # dpdk example apps dpdk_qat and vhost have dependancy on fuse and qat.
 # fuse is in meta-filesystems and qat is not yet upstreamed.
@@ -56,6 +56,9 @@ export SYSROOTPATH = "--sysroot=${STAGING_DIR_HOST}"
 export DPDK_TARGET_MACH = "${@get_dpdk_target_mach(bb,d)}"
 export ICP_LAC_API_DIR = "${STAGING_DIR_TARGET}${includedir}/lac"
 
+export EXAMPLES_BUILD_DIR = "${RTE_TARGET}"
+export ARCHDIR = "generic"
+
 # The list of intel Comms platforms and their target machine
 # process mapping. The supported target machine is listed under
 # dpdk/mk/machine
@@ -83,6 +86,9 @@ do_configure () {
 	sed -e "s#CONFIG_RTE_LIBRTE_VHOST=n#CONFIG_RTE_LIBRTE_VHOST=${CONFIG_VHOST_ENABLED}#" -i ${S}/config/common_linuxapp
 	sed -e "s#CONFIG_RTE_LIBRTE_VHOST_NUMA=.*#CONFIG_RTE_LIBRTE_VHOST_NUMA=${CONFIG_HAVE_NUMA}#" -i ${S}/config/common_linuxapp
 	sed -e "s#CONFIG_RTE_EAL_NUMA_AWARE_HUGEPAGES=.*#CONFIG_RTE_EAL_NUMA_AWARE_HUGEPAGES=${CONFIG_HAVE_NUMA}#" -i ${S}/config/common_linuxapp
+
+	# Fix-up CONFIG_RTE_LIBRTE_POWER based on package config for libvirt
+	sed -e "s#CONFIG_RTE_LIBRTE_POWER=y#CONFIG_RTE_LIBRTE_POWER=${CONFIG_EXAMPLE_VM_POWER_MANAGER}#" -i ${S}/config/common_linuxapp
 
 	make O=$RTE_TARGET T=$RTE_TARGET config
 }
