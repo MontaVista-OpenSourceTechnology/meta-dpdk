@@ -43,7 +43,6 @@ inherit module
 
 export MODULE_DIR="/lib/modules/${KERNEL_VERSION}/kernel/drivers/net"
 export RTE_SDK = "${S}"
-export RTE_TARGET="${@bb.utils.contains("TUNE_FEATURES", "m64", "x86_64-native-linuxapp-gcc", "i686-native-linuxapp-gcc", d)}"
 
 export ICP_ROOT = "${PKG_CONFIG_SYSROOT_DIR}/usr/include"
 export ICP_LIB_ROOT= "${PKG_CONFIG_SYSROOT_DIR}/usr/lib"
@@ -58,6 +57,11 @@ export ICP_LAC_API_DIR = "${STAGING_DIR_TARGET}${includedir}/lac"
 
 export EXAMPLES_BUILD_DIR = "${RTE_TARGET}"
 export ARCHDIR = "generic"
+
+RTE_TARGET_x86-64 = "x86_64-native-linuxapp-gcc"
+RTE_TARGET_i686 = "i686-native-linuxapp-gcc"
+RTE_TARGET_aarch64 = "arm64-${DPDK_TARGET_MACH}-linuxapp-gcc"
+export RTE_TARGET="${RTE_TARGET}"
 
 # The list of intel Comms platforms and their target machine
 # process mapping. The supported target machine is listed under
@@ -77,8 +81,7 @@ do_configure () {
 	unset prefix
 
 	# Fix-up CONFIG_RTE_MACHINE based on target machine
-	sed -e "s#CONFIG_RTE_MACHINE=\"native\"#CONFIG_RTE_MACHINE=\"${DPDK_TARGET_MACH}\"#" -i ${S}/config/defconfig_x86_64-native-linuxapp-gcc
-	sed -e "s#CONFIG_RTE_MACHINE=\"native\"#CONFIG_RTE_MACHINE=\"${DPDK_TARGET_MACH}\"#" -i ${S}/config/defconfig_i686-native-linuxapp-gcc
+	sed -e "s#CONFIG_RTE_MACHINE=\"native\"#CONFIG_RTE_MACHINE=\"${DPDK_TARGET_MACH}\"#" -i ${S}/config/defconfig_${RTE_TARGET}
 
 	# Fix-up vhost configs based on package config
 	sed -e "s#CONFIG_RTE_KNI_VHOST=n#CONFIG_RTE_KNI_VHOST=${CONFIG_VHOST_ENABLED}#" -i ${S}/config/common_linuxapp
