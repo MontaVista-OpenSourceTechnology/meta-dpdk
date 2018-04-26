@@ -59,7 +59,7 @@ export EXAMPLES_BUILD_DIR = "${RTE_TARGET}"
 export ARCHDIR = "generic"
 
 DPDK_RTE_TARGET_x86-64 = "x86_64-native-linuxapp-gcc"
-DPDK_RTE_TARGET_i686 = "i686-native-linuxapp-gcc"
+DPDK_RTE_TARGET_x86 = "i686-native-linuxapp-gcc"
 DPDK_RTE_TARGET_aarch64 = "arm64-${DPDK_TARGET_MACH}-linuxapp-gcc"
 export RTE_TARGET = "${DPDK_RTE_TARGET}"
 
