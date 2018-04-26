@@ -58,10 +58,10 @@ export ICP_LAC_API_DIR = "${STAGING_DIR_TARGET}${includedir}/lac"
 export EXAMPLES_BUILD_DIR = "${RTE_TARGET}"
 export ARCHDIR = "generic"
 
-RTE_TARGET_x86-64 = "x86_64-native-linuxapp-gcc"
-RTE_TARGET_i686 = "i686-native-linuxapp-gcc"
-RTE_TARGET_aarch64 = "arm64-${DPDK_TARGET_MACH}-linuxapp-gcc"
-export RTE_TARGET="${RTE_TARGET}"
+DPDK_RTE_TARGET_x86-64 = "x86_64-native-linuxapp-gcc"
+DPDK_RTE_TARGET_i686 = "i686-native-linuxapp-gcc"
+DPDK_RTE_TARGET_aarch64 = "arm64-${DPDK_TARGET_MACH}-linuxapp-gcc"
+export RTE_TARGET = "${DPDK_RTE_TARGET}"
 
 # The list of intel Comms platforms and their target machine
 # process mapping. The supported target machine is listed under
