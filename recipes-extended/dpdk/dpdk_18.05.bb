@@ -1,6 +1,6 @@
 include dpdk.inc
 
-SRCREV = "92924b207b124c156f7b6dff75110d6af83d971f"
+SRCREV = "a5dce55556286cc56655320d975c67b0dbe08693"
 
 LICENSE = "BSD & LGPLv2 & GPLv2"
 LIC_FILES_CHKSUM = "file://license/gpl-2.0.txt;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
