@@ -1,0 +1,82 @@
+From 30234e8bf0a8c0fe348aaa147307488f59b3265a Mon Sep 17 00:00:00 2001
+From: He Zhe <zhe.he@windriver.com>
+Date: Mon, 13 Aug 2018 20:06:31 +0800
+Subject: [PATCH] dpdk 17.11: Fix strncpy error for GCC8
+
+GCC 8 adds -Wstringop-truncation. If -Werror=stringop-truncation is
+enabled. We will meet errors like the following:
+
+examples/vhost_scsi/scsi.c:213:4: error: 'strncpy' output may be truncated
+copying 32 bytes from a string of length 63 [-Werror=stringop-truncation]
+|     strncpy((char *)vpage->params, bdev->name, 32);
+|     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Upstream-Status: Submitted [stable@dpdk.org]
+
+Signed-off-by: He Zhe <zhe.he@windriver.com>
+---
+ examples/ip_pipeline/config_parse_tm.c | 2 +-
+ examples/ipsec-secgw/parser.c          | 2 +-
+ examples/vhost_scsi/scsi.c             | 6 +++---
+ 3 files changed, 5 insertions(+), 5 deletions(-)
+
+diff --git a/examples/ip_pipeline/config_parse_tm.c b/examples/ip_pipeline/config_parse_tm.c
+index e75eed7..1c945c9 100644
+--- a/examples/ip_pipeline/config_parse_tm.c
++++ b/examples/ip_pipeline/config_parse_tm.c
+@@ -352,7 +352,7 @@ tm_cfgfile_load_sched_subport(
+ 					char name[CFG_NAME_LEN + 1];
+ 
+ 					profile = atoi(entries[j].value);
+-					strncpy(name,
++					memcpy(name,
+ 						entries[j].name,
+ 						sizeof(name));
+ 					n_tokens = rte_strsplit(
+diff --git a/examples/ipsec-secgw/parser.c b/examples/ipsec-secgw/parser.c
+index 9d0ea46..e0881b7 100644
+--- a/examples/ipsec-secgw/parser.c
++++ b/examples/ipsec-secgw/parser.c
+@@ -544,7 +544,7 @@ parse_cfg_file(const char *cfg_filename)
+ 				goto error_exit;
+ 			}
+ 
+-			strncpy(str + strlen(str), oneline,
++			memcpy(str + strlen(str), oneline,
+ 				strlen(oneline));
+ 
+ 			continue;
+diff --git a/examples/vhost_scsi/scsi.c b/examples/vhost_scsi/scsi.c
+index fd430ec..47c5c83 100644
+--- a/examples/vhost_scsi/scsi.c
++++ b/examples/vhost_scsi/scsi.c
+@@ -210,7 +210,7 @@ vhost_bdev_scsi_inquiry_command(struct vhost_block_dev *bdev,
+ 			break;
+ 		case SPC_VPD_UNIT_SERIAL_NUMBER:
+ 			hlen = 4;
+-			strncpy((char *)vpage->params, bdev->name, 32);
++			memcpy((char *)vpage->params, bdev->name, 32);
+ 			vpage->alloc_len = rte_cpu_to_be_16(32);
+ 			break;
+ 		case SPC_VPD_DEVICE_IDENTIFICATION:
+@@ -247,7 +247,7 @@ vhost_bdev_scsi_inquiry_command(struct vhost_block_dev *bdev,
+ 			strncpy((char *)desig->desig, "INTEL", 8);
+ 			vhost_strcpy_pad((char *)&desig->desig[8],
+ 					 bdev->product_name, 16, ' ');
+-			strncpy((char *)&desig->desig[24], bdev->name, 32);
++			memcpy((char *)&desig->desig[24], bdev->name, 32);
+ 			len += sizeof(struct scsi_desig_desc) + 8 + 16 + 32;
+ 
+ 			buf += sizeof(struct scsi_desig_desc) + desig->len;
+@@ -312,7 +312,7 @@ vhost_bdev_scsi_inquiry_command(struct vhost_block_dev *bdev,
+ 				bdev->product_name);
+ 
+ 		/* PRODUCT REVISION LEVEL */
+-		strncpy((char *)inqdata->product_rev, "0001", 4);
++		memcpy((char *)inqdata->product_rev, "0001", 4);
+ 
+ 		/* Standard inquiry data ends here. Only populate
+ 		 * remaining fields if alloc_len indicates enough
+-- 
+2.7.4
+
