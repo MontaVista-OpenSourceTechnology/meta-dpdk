@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/Mellanox/dpdk-dev-libibverbs"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM =  "file://COPYING;md5=7c557f27dd795ba77cc419dddc656b51"
 
-SRC_URI = "https://github.com/Mellanox/dpdk-dev-libibverbs/archive/libibverbs-${PV}.tar.gz \
+SRC_URI = "https://downloads.yoctoproject.org/mirror/sources/libibverbs-${PV}.tar.gz \
            file://init_c.patch \
            file://0001-Fix-build-with-clang.patch \
            file://0002-typecast-enum-to-int-before-comparison.patch \
