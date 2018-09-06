@@ -12,9 +12,6 @@ SRC_URI = "git://dpdk.org/dpdk${STABLE};branch=${BRANCH} \
 	   file://dpdk-17.02-dpdk-fix-installation-warning-and-issue.patch \
 	  "
 
-# A machine needs to enable this using:
-# COMPATIBLE_MACHINE_pn-dpdk-dev-libibverbs = "<machine name>"
-
 COMPATIBLE_MACHINE = "null"
 COMPATIBLE_HOST_libc-musl_class-target = "null"
 COMPATIBLE_HOST_linux-gnux32 = "null"
@@ -35,8 +32,8 @@ export CONFIG_EXAMPLE_VM_POWER_MANAGER = "${@bb.utils.contains('PACKAGECONFIG', 
 export CONFIG_VHOST_ENABLED = "${@bb.utils.contains('PACKAGECONFIG', 'vhost', 'y', 'n', d)}"
 export CONFIG_HAVE_NUMA = "${@bb.utils.contains('PACKAGECONFIG', 'numa', 'y', 'n', d)}"
 
-RDEPENDS_${PN} += "python-subprocess virtual/libibverbs"
-DEPENDS = "virtual/kernel virtual/libibverbs"
+RDEPENDS_${PN} += "python-subprocess"
+DEPENDS = "virtual/kernel"
 do_configure[depends] += "virtual/kernel:do_shared_workdir"
 
 inherit module
