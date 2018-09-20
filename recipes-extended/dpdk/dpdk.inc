@@ -32,6 +32,10 @@ export CONFIG_EXAMPLE_VM_POWER_MANAGER = "${@bb.utils.contains('PACKAGECONFIG', 
 export CONFIG_VHOST_ENABLED = "${@bb.utils.contains('PACKAGECONFIG', 'vhost', 'y', 'n', d)}"
 export CONFIG_HAVE_NUMA = "${@bb.utils.contains('PACKAGECONFIG', 'numa', 'y', 'n', d)}"
 
+# Don't use the default value of datadir and let the dpdk set it to a dpdk
+# specific directory
+datadir[unexport] = "1"
+
 RDEPENDS_${PN} += "python-subprocess"
 DEPENDS = "virtual/kernel"
 do_configure[depends] += "virtual/kernel:do_shared_workdir"
@@ -45,7 +49,7 @@ export ICP_ROOT = "${PKG_CONFIG_SYSROOT_DIR}/usr/include"
 export ICP_LIB_ROOT= "${PKG_CONFIG_SYSROOT_DIR}/usr/lib"
 export RTE_KERNELDIR = "${STAGING_KERNEL_DIR}"
 export RTE_KERNELDIR_OUT = "${STAGING_KERNEL_BUILDDIR}"
-export INSTALL_PATH = "${prefix}/share"
+export INSTALL_PATH = "${prefix}/share/dpdk"
 export RTE_OUTPUT = "${S}/${RTE_TARGET}"
 export ETHTOOL_LIB_PATH = "${S}/examples/ethtool/lib/${RTE_TARGET}/"
 export SYSROOTPATH = "--sysroot=${STAGING_DIR_HOST}"
