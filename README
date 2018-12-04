@@ -68,3 +68,5 @@ The meta-dpdk maintainers will do their best to review and/or pull in
 a patch or patchset within 24 hours of the time it was posted.  For
 larger and/or more involved patches and patchsets, the review process
 may take longer.
+
+Maintainer: Anuj Mittal <anuj.mittal@intel.com>
