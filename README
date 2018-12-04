@@ -1,18 +1,7 @@
 meta-dpdk
 =========
 
-This README file contains information on building and booting
-meta-intel BSP layers.  Please see the corresponding sections below
-for details.
-
-
-Yocto Project Compatible
-========================
-
-The BSPs contained in this layer are compatible with the Yocto Project
-as per the requirements listed here:
-
-  https://www.yoctoproject.org/webform/yocto-project-compatible-registration
+This README file contains information on building the DPDK package.
 
 
 Dependencies
@@ -71,15 +60,11 @@ Specifically, they should:
     tested the patch, and for any non-trivial or non-obvious testing
     setup, provide details of that setup.
 
-Doing a quick 'git log' in meta-intel will provide you with many
+Doing a quick 'git log' in meta-dpdk will provide you with many
 examples of good example commits if you have questions about any
 aspect of the preferred format.
 
-The meta-intel maintainers will do their best to review and/or pull in
+The meta-dpdk maintainers will do their best to review and/or pull in
 a patch or patchset within 24 hours of the time it was posted.  For
 larger and/or more involved patches and patchsets, the review process
 may take longer.
-
-Please see the meta-intel/MAINTAINERS file for the list of maintainers
-and their specific areas; it's also a good idea to cc: the specific
-maintainer, if applicable.
