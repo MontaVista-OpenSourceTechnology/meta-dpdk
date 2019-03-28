@@ -143,6 +143,8 @@ do_install () {
 			install -m 755 ${appname} ${D}/${INSTALL_PATH}/test
 		done
 	done
+
+	cp -r ${S}/mk ${D}${INSTALL_PATH}/
 }
 
 PACKAGES += "${PN}-examples ${PN}-test"
@@ -164,6 +166,7 @@ FILES_${PN}-dev += " \
 	${INSTALL_PATH}/buildtools/ \
 	${INSTALL_PATH}/${RTE_TARGET}/include \
 	${INSTALL_PATH}/${RTE_TARGET}/lib \
+	${INSTALL_PATH}/mk \
 	"
 
 FILES_${PN} += " ${INSTALL_PATH}/usertools/ \
