@@ -8,6 +8,8 @@ LIC_FILES_CHKSUM = "file://license/gpl-2.0.txt;md5=b234ee4d69f5fce4486a80fdaf4a4
                     file://license/bsd-3-clause.txt;md5=0f00d99239d922ffd13cabef83b33444"
 
 SRC_URI += "\
+            file://dpdk-16.07-dpdk-fix-for-parellel-make-issue.patch \
+            file://dpdk-17.02-dpdk-fix-installation-warning-and-issue.patch \
             file://dpdk-16.04-dpdk-enable-ip_fragmentation-in-common_base-config.patch \
             file://0001-examples-Fix-maybe-uninitialized-warning.patch \
             "

@@ -8,8 +8,6 @@ S = "${WORKDIR}/git"
 SRC_URI = "git://dpdk.org/dpdk${STABLE};branch=${BRANCH} \
 	   file://dpdk-16.04-add-RTE_KERNELDIR_OUT-to-split-kernel-bu.patch \
 	   file://dpdk-16.07-add-sysroot-option-within-app-makefile.patch \
-	   file://dpdk-16.07-dpdk-fix-for-parellel-make-issue.patch \
-	   file://dpdk-17.02-dpdk-fix-installation-warning-and-issue.patch \
 	  "
 
 COMPATIBLE_MACHINE = "null"
