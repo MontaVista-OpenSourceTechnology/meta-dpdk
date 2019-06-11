@@ -12,4 +12,5 @@ SRC_URI += "\
         file://dpdk-16.07-dpdk-fix-for-parellel-make-issue.patch \
         file://dpdk-17.02-dpdk-fix-installation-warning-and-issue.patch \
         file://dpdk-17.11-Fix-strncpy-error-for-GCC8.patch \
+        file://dpdk-17.11-mk-disable-warning-for-packed-member-pointer.patch \
 "

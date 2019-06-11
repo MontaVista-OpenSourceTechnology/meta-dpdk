@@ -1,0 +1,48 @@
+From a385972c3675dd2b4792ab5b3cf7a536e6f9846c Mon Sep 17 00:00:00 2001
+From: Reshma Pattan <reshma.pattan@intel.com>
+Date: Thu, 2 May 2019 10:33:34 +0100
+Subject: [PATCH] mk: disable warning for packed member pointer
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+gcc 9 on Fedora 30 gives an error
+"taking address of packed member may result in an
+unaligned pointer value" warnings.
+
+For clang builds this warning is already disabled,
+so disable "-Waddress-of-packed-member" for gcc builds
+also.
+
+Snippet of build error:
+lib/librte_eal/linux/eal/eal_memalloc.c: In function ‘alloc_seg_walk’:
+lib/librte_eal/linux/eal/eal_memalloc.c:768:12: error:
+taking address of packed member of ‘struct rte_mem_config’ may result
+in an unaligned pointer value [-Werror=address-of-packed-member]
+  768 |  cur_msl = &mcfg->memsegs[msl_idx];
+      |            ^~~~~~~~~~~~~~~~~~~~~~~
+
+Signed-off-by: Reshma Pattan <reshma.pattan@intel.com>
+Tested-by: David Marchand <david.marchand@redhat.com>
+Upstream-Status: Backport
+Signed-off-by: He Zhe <zhe.he@windriver.com>
+---
+ mk/toolchain/gcc/rte.vars.mk | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/mk/toolchain/gcc/rte.vars.mk b/mk/toolchain/gcc/rte.vars.mk
+index d8b99fa..b852fcf 100644
+--- a/mk/toolchain/gcc/rte.vars.mk
++++ b/mk/toolchain/gcc/rte.vars.mk
+@@ -87,5 +87,8 @@ WERROR_FLAGS += -Wimplicit-fallthrough=2
+ WERROR_FLAGS += -Wno-format-truncation
+ endif
+ 
++# disable packed member unalign warnings
++WERROR_FLAGS += -Wno-address-of-packed-member
++
+ export CC AS AR LD OBJCOPY OBJDUMP STRIP READELF
+ export TOOLCHAIN_CFLAGS TOOLCHAIN_LDFLAGS TOOLCHAIN_ASFLAGS
+-- 
+2.7.4
+
