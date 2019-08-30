@@ -40,7 +40,7 @@ do_configure[depends] += "virtual/kernel:do_shared_workdir"
 
 inherit module
 
-export MODULE_DIR="/lib/modules/${KERNEL_VERSION}/kernel/drivers/net"
+export MODULE_DIR="${nonarch_base_libdir}/modules/${KERNEL_VERSION}/kernel/drivers/net"
 export RTE_SDK = "${S}"
 
 export ICP_ROOT = "${PKG_CONFIG_SYSROOT_DIR}/usr/include"
