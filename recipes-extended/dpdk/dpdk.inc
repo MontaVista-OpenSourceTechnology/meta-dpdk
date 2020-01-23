@@ -34,7 +34,7 @@ export CONFIG_HAVE_NUMA = "${@bb.utils.contains('PACKAGECONFIG', 'numa', 'y', 'n
 # specific directory
 datadir[unexport] = "1"
 
-RDEPENDS_${PN} += "python-subprocess"
+RDEPENDS_${PN} += "python3-core"
 DEPENDS = "virtual/kernel"
 do_configure[depends] += "virtual/kernel:do_shared_workdir"
 
@@ -143,6 +143,10 @@ do_install () {
 	done
 
 	cp -r ${S}/mk ${D}${INSTALL_PATH}/
+
+	for ss in $(find ${D} -type f -name "*.py"); do
+		sed -i -e "1s,#!.*python.*,#!${USRBINPATH}/env python3," ${ss}
+	done
 }
 
 PACKAGES += "${PN}-examples ${PN}-test"
