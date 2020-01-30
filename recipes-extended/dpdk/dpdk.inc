@@ -62,6 +62,9 @@ DPDK_RTE_TARGET_x86 = "i686-native-linuxapp-gcc"
 DPDK_RTE_TARGET_aarch64 = "arm64-${DPDK_TARGET_MACH}-linuxapp-gcc"
 export RTE_TARGET = "${DPDK_RTE_TARGET}"
 
+CONFIG_FILE_NAME = "common_linux"
+TEST_DIR = "test"
+
 # The list of intel Comms platforms and their target machine
 # process mapping. The supported target machine is listed under
 # dpdk/mk/machine
@@ -83,14 +86,14 @@ do_configure () {
 	sed -e "s#CONFIG_RTE_MACHINE=\"native\"#CONFIG_RTE_MACHINE=\"${DPDK_TARGET_MACH}\"#" -i ${S}/config/defconfig_${RTE_TARGET}
 
 	# Fix-up vhost configs based on package config
-	sed -e "s#CONFIG_RTE_KNI_VHOST=n#CONFIG_RTE_KNI_VHOST=${CONFIG_VHOST_ENABLED}#" -i ${S}/config/common_linuxapp
-	sed -e "s#CONFIG_RTE_KNI_VHOST_VNET_HDR_EN=n#CONFIG_RTE_KNI_VHOST_VNET_HDR_EN=${CONFIG_VHOST_ENABLED}#" -i ${S}/config/common_linuxapp
-	sed -e "s#CONFIG_RTE_LIBRTE_VHOST=n#CONFIG_RTE_LIBRTE_VHOST=${CONFIG_VHOST_ENABLED}#" -i ${S}/config/common_linuxapp
-	sed -e "s#CONFIG_RTE_LIBRTE_VHOST_NUMA=.*#CONFIG_RTE_LIBRTE_VHOST_NUMA=${CONFIG_HAVE_NUMA}#" -i ${S}/config/common_linuxapp
-	sed -e "s#CONFIG_RTE_EAL_NUMA_AWARE_HUGEPAGES=.*#CONFIG_RTE_EAL_NUMA_AWARE_HUGEPAGES=${CONFIG_HAVE_NUMA}#" -i ${S}/config/common_linuxapp
+	sed -e "s#CONFIG_RTE_KNI_VHOST=n#CONFIG_RTE_KNI_VHOST=${CONFIG_VHOST_ENABLED}#" -i ${S}/config/${CONFIG_NAME}
+	sed -e "s#CONFIG_RTE_KNI_VHOST_VNET_HDR_EN=n#CONFIG_RTE_KNI_VHOST_VNET_HDR_EN=${CONFIG_VHOST_ENABLED}#" -i ${S}/config/${CONFIG_NAME}
+	sed -e "s#CONFIG_RTE_LIBRTE_VHOST=n#CONFIG_RTE_LIBRTE_VHOST=${CONFIG_VHOST_ENABLED}#" -i ${S}/config/${CONFIG_NAME}
+	sed -e "s#CONFIG_RTE_LIBRTE_VHOST_NUMA=.*#CONFIG_RTE_LIBRTE_VHOST_NUMA=${CONFIG_HAVE_NUMA}#" -i ${S}/config/${CONFIG_NAME}
+	sed -e "s#CONFIG_RTE_EAL_NUMA_AWARE_HUGEPAGES=.*#CONFIG_RTE_EAL_NUMA_AWARE_HUGEPAGES=${CONFIG_HAVE_NUMA}#" -i ${S}/config/${CONFIG_NAME}
 
 	# Fix-up CONFIG_RTE_LIBRTE_POWER based on package config for libvirt
-	sed -e "s#CONFIG_RTE_LIBRTE_POWER=y#CONFIG_RTE_LIBRTE_POWER=${CONFIG_EXAMPLE_VM_POWER_MANAGER}#" -i ${S}/config/common_linuxapp
+	sed -e "s#CONFIG_RTE_LIBRTE_POWER=y#CONFIG_RTE_LIBRTE_POWER=${CONFIG_EXAMPLE_VM_POWER_MANAGER}#" -i ${S}/config/${CONFIG_NAME}
 
 	make O=$RTE_TARGET T=$RTE_TARGET config
 }
@@ -109,10 +112,10 @@ do_compile () {
 		   EXTRA_CFLAGS="${HOST_CC_ARCH} ${TOOLCHAIN_OPTIONS} -O3 -I${STAGING_INCDIR}" \
 		   CROSS="${TARGET_PREFIX}" O="${S}/examples/$@/"
 
-	cd ${S}/test/
+	cd ${S}/${TEST_DIR}/
 	oe_runmake EXTRA_LDFLAGS="-L${STAGING_LIBDIR} --hash-style=gnu -fuse-ld=bfd" \
 		   EXTRA_CFLAGS="${HOST_CC_ARCH} ${TOOLCHAIN_OPTIONS} -O3 -I${STAGING_INCDIR}" \
-		   CROSS="${TARGET_PREFIX}" O="${S}/test/$@/"
+		   CROSS="${TARGET_PREFIX}" O="${S}/${TEST_DIR}/$@/"
 }
 
 do_install () {
@@ -131,7 +134,7 @@ do_install () {
 		done
 	done
 
-	oe_runmake -C test install DESTDIR=${D}${INSTALL_PATH}/test/
+	oe_runmake -C ${TEST_DIR} install DESTDIR=${D}${INSTALL_PATH}/test/
 
 	cp -r ${S}/mk ${D}${INSTALL_PATH}/
 
