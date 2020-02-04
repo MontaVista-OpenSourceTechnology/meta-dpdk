@@ -179,3 +179,5 @@ FILES_${PN}-examples += " \
 FILES_${PN}-test += " \
 	${INSTALL_PATH}/test \
 	"
+
+CVE_PRODUCT = "data_plane_development_kit"
