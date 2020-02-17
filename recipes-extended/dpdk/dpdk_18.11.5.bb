@@ -1,5 +1,8 @@
 include dpdk.inc
 
+CONFIG_NAME = "common_linuxapp"
+TEST_DIR = "test"
+
 STABLE = "-stable"
 BRANCH = "18.11"
 SRCREV = "7df88d5d7e913146dadccf1645d558ffc0146825"

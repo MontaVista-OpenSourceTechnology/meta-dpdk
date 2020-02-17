@@ -67,7 +67,7 @@ DPDK_RTE_TARGET_x86 = "i686-native-linuxapp-gcc"
 DPDK_RTE_TARGET_aarch64 = "arm64-${DPDK_TARGET_MACH}-linuxapp-gcc"
 export RTE_TARGET = "${DPDK_RTE_TARGET}"
 
-CONFIG_FILE_NAME = "common_linux"
+CONFIG_NAME = "common_linux"
 TEST_DIR = "test"
 
 # The list of intel Comms platforms and their target machine
