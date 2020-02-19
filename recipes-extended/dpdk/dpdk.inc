@@ -134,7 +134,16 @@ do_install () {
 		done
 	done
 
-	oe_runmake -C ${TEST_DIR} install DESTDIR=${D}${INSTALL_PATH}/test/
+	# Install test
+	for dirname in ${S}/${TEST_DIR}/app/*
+	do
+		install -m 0755 -d ${D}/${INSTALL_PATH}/test
+
+		for appname in `find ${dirname} -regex ".*test\/app\/[-0-9a-zA-Z0-9/_]*$"`
+		do
+			install -m 755 ${appname} ${D}/${INSTALL_PATH}/test
+		done
+	done
 
 	cp -r ${S}/mk ${D}${INSTALL_PATH}/
 
