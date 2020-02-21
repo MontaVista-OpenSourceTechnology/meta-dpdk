@@ -1,11 +1,6 @@
 DESCRIPTION = "Intel(r) Data Plane Development Kit"
 HOMEPAGE = "http://dpdk.org"
 
-python () {
-    if not bb.utils.contains('KERNEL_FEATURES', 'features/intel-dpdk/intel-dpdk.scc', True, False, d):
-        bb.warn("dpdk requires kernel options in features/intel-dpdk/intel-dpdk.scc to be able to build and work properly. You can either enable them by adding features/intel-dpdk/intel-dpdk.scc to KERNEL_FEATURES or by standard kernel configuration process.")
-}
-
 STABLE = ""
 BRANCH = "master"
 S = "${WORKDIR}/git"
