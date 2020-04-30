@@ -34,7 +34,7 @@ export CONFIG_HAVE_NUMA = "${@bb.utils.contains('PACKAGECONFIG', 'numa', 'y', 'n
 # specific directory
 datadir[unexport] = "1"
 
-RDEPENDS_${PN} += "python3-core"
+RDEPENDS_${PN} += "pciutils python3-core"
 DEPENDS = "virtual/kernel"
 do_configure[depends] += "virtual/kernel:do_shared_workdir"
 
