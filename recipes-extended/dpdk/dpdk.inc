@@ -62,6 +62,9 @@ DPDK_RTE_TARGET_x86 = "i686-native-linuxapp-gcc"
 DPDK_RTE_TARGET_aarch64 = "arm64-${DPDK_TARGET_MACH}-linuxapp-gcc"
 export RTE_TARGET = "${DPDK_RTE_TARGET}"
 
+# Workaround failure on gcc10
+TOOLCHAIN_OPTIONS += "-Wno-error=maybe-uninitialized"
+
 CONFIG_NAME = "common_linux"
 TEST_DIR = "test"
 
