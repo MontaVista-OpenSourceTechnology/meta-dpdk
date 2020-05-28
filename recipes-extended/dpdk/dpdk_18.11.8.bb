@@ -2,7 +2,7 @@ include dpdk.inc
 
 STABLE = "-stable"
 BRANCH = "18.11"
-SRCREV = "e6f0c6c7debe7693e3b80d721842841d56be42e7"
+SRCREV = "b80cf96c33fd91619c613b7c0877f4ebe175d48c"
 
 LICENSE = "BSD-3-Clause & LGPLv2.1 & GPLv2"
 LIC_FILES_CHKSUM = "file://license/gpl-2.0.txt;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
