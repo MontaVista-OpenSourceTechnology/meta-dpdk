@@ -1,8 +1,8 @@
 DESCRIPTION = "Intel(r) Data Plane Development Kit"
 HOMEPAGE = "http://dpdk.org"
 
-STABLE = ""
-BRANCH = "master"
+STABLE ?= ""
+BRANCH ?= "master"
 S = "${WORKDIR}/git"
 
 SRC_URI = "git://dpdk.org/dpdk${STABLE};branch=${BRANCH} \
