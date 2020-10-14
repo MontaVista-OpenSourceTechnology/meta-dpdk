@@ -5,7 +5,7 @@ TEST_DIR = "app/test"
 
 STABLE = "-stable"
 BRANCH = "19.11"
-SRCREV = "798524b5e3c320468b927783268de6be61e98bfc"
+SRCREV = "1d28832feb881d4512993791d30d695cc9c7160b"
 
 LICENSE = "BSD-3-Clause & LGPLv2.1 & GPLv2"
 LIC_FILES_CHKSUM = "file://license/gpl-2.0.txt;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
