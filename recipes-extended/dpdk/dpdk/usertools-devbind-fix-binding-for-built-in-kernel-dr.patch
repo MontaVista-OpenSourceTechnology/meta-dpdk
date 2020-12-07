@@ -1,0 +1,54 @@
+From b2a1d7a4661dc78a4c070de5542bf2c201762cb2 Mon Sep 17 00:00:00 2001
+From: Yongxin Liu <yongxin.liu@windriver.com>
+Date: Mon, 23 Nov 2020 11:02:52 +0800
+Subject: [PATCH] usertools/devbind: fix binding for built-in kernel drivers
+
+A driver can be loaded as a dynamic module or a built-in module.
+In commit 681a67288655 ("usertools: check if module is loaded
+before binding"), script only checks modules in /sys/module/.
+
+However, for built-in kernel driver, it only shows up in /sys/module/,
+if it has a version or at least one parameter. So add check for
+modules in /lib/modules/$(uname -r)/modules.builtin.
+
+Upstream-Status: Submitted [https://patches.dpdk.org/patch/84454]
+
+Signed-off-by: Yongxin Liu <yongxin.liu@windriver.com>
+---
+ usertools/dpdk-devbind.py | 13 ++++++++++++-
+ 1 file changed, 12 insertions(+), 1 deletion(-)
+
+diff --git a/usertools/dpdk-devbind.py b/usertools/dpdk-devbind.py
+index b1d149876..89a0ab1c9 100755
+--- a/usertools/dpdk-devbind.py
++++ b/usertools/dpdk-devbind.py
+@@ -8,6 +8,7 @@
+ import os
+ import getopt
+ import subprocess
++import platform
+ from os.path import exists, abspath, dirname, basename
+ 
+ # The PCI base class for all devices
+@@ -172,7 +173,17 @@ def module_is_loaded(module):
+ 
+     loaded_modules = sysfs_mods
+ 
+-    return module in sysfs_mods
++    # add built-in modules as loaded
++    release = platform.uname().release
++    filename = os.path.join("/lib/modules/", release, "modules.builtin")
++    if os.path.exists(filename):
++        try:
++            with open(filename) as f:
++                loaded_modules += [os.path.splitext(os.path.basename(mod))[0] for mod in f]
++        except IOError:
++            print("Warning: cannot read list of built-in kernel modules")
++
++    return module in loaded_modules
+ 
+ 
+ def check_modules():
+-- 
+2.14.4
+
