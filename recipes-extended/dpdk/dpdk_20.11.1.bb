@@ -18,6 +18,8 @@ COMPATIBLE_MACHINE = "null"
 COMPATIBLE_HOST_libc-musl_class-target = "null"
 COMPATIBLE_HOST_linux-gnux32 = "null"
 
+PACKAGECONFIG[libvirt] = ",,libvirt"
+
 RDEPENDS_${PN} += "pciutils python3-core"
 RDEPENDS_${PN}-examples += "bash"
 DEPENDS = "numactl"
