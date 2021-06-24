@@ -2,6 +2,7 @@ include dpdk.inc
 
 SRC_URI += " \
             file://0001-meson.build-march-and-mcpu-already-passed-by-Yocto.patch \
+            file://0001-ifpga-meson-Fix-finding-librt-using-find_library.patch \
 "
 
 STABLE = "-stable"
