@@ -16,22 +16,22 @@ EXTRA_OEMESON = " -Denable_kmods=false \
 "
 
 COMPATIBLE_MACHINE = "null"
-COMPATIBLE_HOST_libc-musl_class-target = "null"
-COMPATIBLE_HOST_linux-gnux32 = "null"
+COMPATIBLE_HOST:libc-musl:class-target = "null"
+COMPATIBLE_HOST:linux-gnux32 = "null"
 
 PACKAGECONFIG ??= " "
 PACKAGECONFIG[afxdp] = ",,libbpf"
 PACKAGECONFIG[libvirt] = ",,libvirt"
 
-RDEPENDS_${PN} += "pciutils python3-core"
-RDEPENDS_${PN}-examples += "bash"
+RDEPENDS:${PN} += "pciutils python3-core"
+RDEPENDS:${PN}-examples += "bash"
 DEPENDS = "numactl"
 
 inherit meson
 
 INSTALL_PATH = "${prefix}/share/dpdk"
 
-do_install_append(){
+do_install:append(){
     # remove  source files
     rm -rf ${D}/${INSTALL_PATH}/examples/*
 
@@ -48,16 +48,16 @@ do_install_append(){
 
 PACKAGES =+ "${PN}-examples ${PN}-tools"
 
-FILES_${PN} = " ${bindir}/dpdk-testpmd \
+FILES:${PN} = " ${bindir}/dpdk-testpmd \
 		 ${bindir}/dpdk-proc-info \
 		 ${libdir}/*.so* \
 		 ${libdir}/dpdk/pmds-21.0/*.so* \
 		 "
-FILES_${PN}-examples = " \
+FILES:${PN}-examples = " \
 	${prefix}/share/dpdk/examples/* \
 	"
 
-FILES_${PN}-tools = " \
+FILES:${PN}-tools = " \
     ${bindir}/dpdk-pdump \
     ${bindir}/dpdk-test \
     ${bindir}/dpdk-test-* \
@@ -66,4 +66,4 @@ FILES_${PN}-tools = " \
 
 CVE_PRODUCT = "data_plane_development_kit"
 
-INSANE_SKIP_${PN} = "dev-so"
+INSANE_SKIP:${PN} = "dev-so"

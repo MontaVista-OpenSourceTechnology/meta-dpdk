@@ -1,6 +1,6 @@
 include dpdk.inc
 
-FILESEXTRAPATHS_prepend := "${THISDIR}/dpdk:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/dpdk:"
 
 SRC_URI += " \
             file://0001-Makefile-add-makefile.patch \

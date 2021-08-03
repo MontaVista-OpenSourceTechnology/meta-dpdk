@@ -14,8 +14,8 @@ SRCREV = "1d28832feb881d4512993791d30d695cc9c7160b"
 S = "${WORKDIR}/git"
 
 COMPATIBLE_MACHINE = "null"
-COMPATIBLE_HOST_libc-musl_class-target = "null"
-COMPATIBLE_HOST_linux-gnux32 = "null"
+COMPATIBLE_HOST:libc-musl:class-target = "null"
+COMPATIBLE_HOST:linux-gnux32 = "null"
 
 # dpdk example apps dpdk_qat and vhost have dependancy on fuse and qat.
 # fuse is in meta-filesystems and qat is not yet upstreamed.
@@ -37,7 +37,7 @@ export CONFIG_HAVE_NUMA = "${@bb.utils.contains('PACKAGECONFIG', 'numa', 'y', 'n
 # specific directory
 datadir[unexport] = "1"
 
-RDEPENDS_${PN} += "pciutils python3-core"
+RDEPENDS:${PN} += "pciutils python3-core"
 DEPENDS = "virtual/kernel"
 do_configure[depends] += "virtual/kernel:do_shared_workdir"
 
@@ -60,9 +60,9 @@ export ICP_LAC_API_DIR = "${STAGING_DIR_TARGET}${includedir}/lac"
 export EXAMPLES_BUILD_DIR = "${RTE_TARGET}"
 export ARCHDIR = "generic"
 
-DPDK_RTE_TARGET_x86-64 = "x86_64-native-linuxapp-gcc"
-DPDK_RTE_TARGET_x86 = "i686-native-linuxapp-gcc"
-DPDK_RTE_TARGET_aarch64 = "arm64-${DPDK_TARGET_MACH}-linuxapp-gcc"
+DPDK_RTE_TARGET:x86-64 = "x86_64-native-linuxapp-gcc"
+DPDK_RTE_TARGET:x86 = "i686-native-linuxapp-gcc"
+DPDK_RTE_TARGET:aarch64 = "arm64-${DPDK_TARGET_MACH}-linuxapp-gcc"
 export RTE_TARGET = "${DPDK_RTE_TARGET}"
 
 # Workaround failure on gcc10
@@ -163,16 +163,16 @@ do_install () {
 
 PACKAGES += "${PN}-examples ${PN}-test"
 
-FILES_${PN}-dbg += " \
+FILES:${PN}-dbg += " \
 	${INSTALL_PATH}/.debug \
 	${INSTALL_PATH}/examples/*/.debug \
 	"
 
-FILES_${PN}-doc += "\
+FILES:${PN}-doc += "\
 	${INSTALL_PATH}/doc \
 	"
 
-FILES_${PN}-dev += " \
+FILES:${PN}-dev += " \
 	${INSTALL_PATH}/${RTE_TARGET}/.config \
 	${includedir} \
 	${includedir}/${ARCHDIR} \
@@ -183,15 +183,15 @@ FILES_${PN}-dev += " \
 	${INSTALL_PATH}/mk \
 	"
 
-FILES_${PN} += " ${INSTALL_PATH}/usertools/ \
+FILES:${PN} += " ${INSTALL_PATH}/usertools/ \
 		 ${prefix}/sbin/ \
 		 ${prefix}/bin/ \
 		 ${libdir}/ \
 		 "
-FILES_${PN}-examples += " \
+FILES:${PN}-examples += " \
 	${INSTALL_PATH}/examples/* \
 	"
 
-FILES_${PN}-test += " \
+FILES:${PN}-test += " \
 	${INSTALL_PATH}/test \
 	"
