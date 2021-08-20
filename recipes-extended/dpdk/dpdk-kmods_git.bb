@@ -5,7 +5,7 @@ HOMEPAGE = "http://git.dpdk.org/dpdk-kmods/"
 LICENSE = "GPL-2"
 LIC_FILES_CHKSUM = "file://igb_uio.c;beginline=1;endline=4;md5=a05cd72f85021e22ff6b2632b437450b"
 
-SRC_URI = "git://dpdk.org/dpdk-kmods;branch=main \
+SRC_URI = "git://dpdk.org/git/dpdk-kmods;protocol=https;branch=main \
            "
 SRCREV = "e13d7af77a1bf98757f85c3c4083f6ee6d0d2372"
 
