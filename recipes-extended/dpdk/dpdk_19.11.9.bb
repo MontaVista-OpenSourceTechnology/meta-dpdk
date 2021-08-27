@@ -3,14 +3,11 @@ include dpdk.inc
 SRC_URI += " \
             file://dpdk-16.04-add-RTE_KERNELDIR_OUT-to-split-kernel-bu.patch \
             file://dpdk-16.07-add-sysroot-option-within-app-makefile.patch \
-            file://0001-Starting-from-Linux-5.9-get_user_pages_remote-API-do.patch \
-            file://usertools-devbind-fix-binding-for-built-in-kernel-dr.patch \
-            file://0001-test-table-fix-build-with-GCC-11.patch"
-
+            "
 
 STABLE = "-stable"
 BRANCH = "19.11"
-SRCREV = "1d28832feb881d4512993791d30d695cc9c7160b"
+SRCREV = "a3d97ddaead03cb19b5160bc78e724659795aea7"
 S = "${WORKDIR}/git"
 
 COMPATIBLE_MACHINE = "null"
