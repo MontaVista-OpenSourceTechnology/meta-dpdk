@@ -4,6 +4,7 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/dpdk:"
 
 SRC_URI += " \
             file://0001-Makefile-add-makefile.patch \
+            file://0002-kni-update-kernel-API-to-set-random-MAC-address.patch \
 "
 STABLE = "-stable"
 BRANCH = "20.11"

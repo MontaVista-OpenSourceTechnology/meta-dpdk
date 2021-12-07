@@ -1,0 +1,44 @@
+From e0a23f3cf8410871d28fdd8f0806216848b357ce Mon Sep 17 00:00:00 2001
+From: Ferruh Yigit <ferruh.yigit@intel.com>
+Date: Wed, 3 Nov 2021 12:59:50 +0000
+Subject: [PATCH] kni: update kernel API to set random MAC address
+
+Previously used 'random_ether_addr()' API is removed in upstream kernel
+with commit
+Commit ba530fea8ca1 ("ethernet: remove random_ether_addr()")
+
+Replacement API 'eth_random_addr()' is around since v3.6 [1], so
+simply switching to this API without any version checks.
+
+[1]
+0a4dd594982a ("etherdevice: Rename random_ether_addr to eth_random_addr")
+
+Signed-off-by: Ferruh Yigit <ferruh.yigit@intel.com>
+
+Upstream-Status: Backport [http://git.dpdk.org/dpdk/commit/?id=e6cbfd9bf30bbc4170fe8c7c04a16d9cf795fb90]
+Signed-off-by: Yongxin Liu <yongxin.liu@windriver.com>
+---
+ kernel/linux/kni/kni_misc.c | 7 ++-----
+ 1 file changed, 2 insertions(+), 5 deletions(-)
+
+diff --git a/kernel/linux/kni/kni_misc.c b/kernel/linux/kni/kni_misc.c
+index 2b464c4381..f4944e1ddf 100644
+--- a/kernel/linux/kni/kni_misc.c
++++ b/kernel/linux/kni/kni_misc.c
+@@ -399,11 +399,8 @@ kni_ioctl_create(struct net *net, uint32_t ioctl_num,
+ 	if (is_valid_ether_addr(dev_info.mac_addr))
+ 		memcpy(net_dev->dev_addr, dev_info.mac_addr, ETH_ALEN);
+ 	else
+-		/*
+-		 * Generate random mac address. eth_random_addr() is the
+-		 * newer version of generating mac address in kernel.
+-		 */
+-		random_ether_addr(net_dev->dev_addr);
++		/* Generate random MAC address. */
++		eth_random_addr(net_dev->dev_addr);
+ 
+ 	if (dev_info.mtu)
+ 		net_dev->mtu = dev_info.mtu;
+-- 
+2.32.0
+
