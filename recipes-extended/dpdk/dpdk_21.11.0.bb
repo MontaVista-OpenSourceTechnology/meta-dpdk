@@ -47,7 +47,7 @@ do_install:append(){
 
 PACKAGES =+ "${PN}-examples ${PN}-tools"
 
-FILES:${PN} = " ${bindir}/dpdk-testpmd \
+FILES:${PN} += " ${bindir}/dpdk-testpmd \
 		 ${bindir}/dpdk-proc-info \
 		 ${libdir}/*.so* \
 		 ${libdir}/dpdk/pmds-22.0/*.so* \
