@@ -2,7 +2,7 @@ SUMMARY = "DPDK Kernel Module igb_uio"
 DESCRIPTION = "UIO driver for Intel IGB PCI cards"
 HOMEPAGE = "http://git.dpdk.org/dpdk-kmods/"
 
-LICENSE = "GPL-2"
+LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://igb_uio.c;beginline=1;endline=4;md5=a05cd72f85021e22ff6b2632b437450b"
 
 SRC_URI = "git://dpdk.org/git/dpdk-kmods;protocol=https;branch=main \
