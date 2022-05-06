@@ -2,12 +2,11 @@ include dpdk.inc
 
 SRC_URI += " \
             file://0001-meson.build-march-and-mcpu-already-passed-by-Yocto.patch \
-            file://0001-ifpga-meson-Fix-finding-librt-using-find_library.patch \
 "
 
 STABLE = "-stable"
 BRANCH = "20.11"
-SRCREV = "b1e71cf43153cca07db6cbb69fdca030ccf52234"
+SRCREV = "abf68ccc8b1f923f0eb0b6bf2a8b944378e1ebeb"
 S = "${WORKDIR}/git"
 
 # kernel module is provide by dpdk-module recipe, so disable here
