@@ -4,6 +4,7 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/dpdk:"
 
 SRC_URI += " \
             file://0001-Makefile-add-makefile.patch \
+            file://0001-kni_net.c-use-netif_rx-instead-of-netif_rx_ni.patch \
 "
 STABLE = "-stable"
 BRANCH = "21.11"
