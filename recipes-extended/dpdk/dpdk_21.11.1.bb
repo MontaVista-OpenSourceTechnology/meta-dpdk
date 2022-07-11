@@ -2,6 +2,7 @@ include dpdk.inc
 
 SRC_URI += " \
             file://0001-meson.build-march-and-mcpu-already-passed-by-Yocto-21.11.patch \
+            file://0002-dma-idxd-fix-AVX2-in-non-datapath-functions.patch \
 "
 
 STABLE = "-stable"
