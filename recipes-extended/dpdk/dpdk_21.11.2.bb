@@ -2,12 +2,11 @@ include dpdk.inc
 
 SRC_URI += " \
             file://0001-meson.build-march-and-mcpu-already-passed-by-Yocto-21.11.patch \
-            file://0002-dma-idxd-fix-AVX2-in-non-datapath-functions.patch \
 "
 
 STABLE = "-stable"
 BRANCH = "21.11"
-SRCREV = "fcd039e4663bf2b595d7af3a8175a3e0bc09b367"
+SRCREV = "7bcd45ce824d0ea2a9f30d16855613a93521851b"
 S = "${WORKDIR}/git"
 
 # CVE-2021-3839 has been fixed by commit 4c40d30d2b in 21.11.1
