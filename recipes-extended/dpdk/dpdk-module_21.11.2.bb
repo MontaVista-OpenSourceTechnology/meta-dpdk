@@ -4,11 +4,10 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/dpdk:"
 
 SRC_URI += " \
             file://0001-Makefile-add-makefile.patch \
-            file://0001-kni_net.c-use-netif_rx-instead-of-netif_rx_ni.patch \
 "
 STABLE = "-stable"
 BRANCH = "21.11"
-SRCREV = "fcd039e4663bf2b595d7af3a8175a3e0bc09b367"
+SRCREV = "7bcd45ce824d0ea2a9f30d16855613a93521851b"
 S = "${WORKDIR}/git"
 
 inherit module
