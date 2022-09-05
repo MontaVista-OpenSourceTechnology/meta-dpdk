@@ -10,6 +10,12 @@ BRANCH = "21.11"
 SRCREV = "fcd039e4663bf2b595d7af3a8175a3e0bc09b367"
 S = "${WORKDIR}/git"
 
+# CVE-2021-3839 has been fixed by commit 4c40d30d2b in 21.11.1
+# NVD database is incomplete
+CVE_CHECK_IGNORE += "\
+    CVE-2021-3839 \
+"
+
 # kernel module is provide by dpdk-module recipe, so disable here
 EXTRA_OEMESON = " -Denable_kmods=false \
                 -Dexamples=all \
