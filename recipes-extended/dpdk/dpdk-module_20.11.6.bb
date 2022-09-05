@@ -4,11 +4,10 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/dpdk:"
 
 SRC_URI += " \
             file://0001-Makefile-add-makefile.patch \
-            file://0002-kni-update-kernel-API-to-set-random-MAC-address.patch \
 "
 STABLE = "-stable"
 BRANCH = "20.11"
-SRCREV = "abf68ccc8b1f923f0eb0b6bf2a8b944378e1ebeb"
+SRCREV = "73655c6414914c99a33010e9e7bdae9cafd24404"
 S = "${WORKDIR}/git"
 
 inherit module
