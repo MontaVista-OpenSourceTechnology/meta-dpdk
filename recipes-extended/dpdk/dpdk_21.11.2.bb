@@ -35,7 +35,7 @@ RDEPENDS:${PN} += "pciutils python3-core"
 RDEPENDS:${PN}-examples += "bash"
 DEPENDS = "numactl python3-pyelftools-native"
 
-inherit meson
+inherit meson pkgconfig
 
 INSTALL_PATH = "${prefix}/share/dpdk"
 
