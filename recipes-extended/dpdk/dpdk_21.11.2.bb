@@ -28,7 +28,7 @@ COMPATIBLE_HOST:libc-musl:class-target = "null"
 COMPATIBLE_HOST:linux-gnux32 = "null"
 
 PACKAGECONFIG ??= " "
-PACKAGECONFIG[afxdp] = ",,libbpf"
+PACKAGECONFIG[afxdp] = ",,libbpf xdp-tools"
 PACKAGECONFIG[libvirt] = ",,libvirt"
 
 RDEPENDS:${PN} += "pciutils python3-core"
