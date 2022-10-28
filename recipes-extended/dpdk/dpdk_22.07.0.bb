@@ -1,6 +1,6 @@
 include dpdk.inc
 
-SRC_URI = "git://dpdk.org/dpdk;branch=${BRANCH};protocol=https \
+SRC_URI = "git://dpdk.org/git/dpdk;branch=${BRANCH};protocol=https \
            file://0001-meson.build-march-and-mcpu-already-passed-by-Yocto-21.11.patch \
 "
 

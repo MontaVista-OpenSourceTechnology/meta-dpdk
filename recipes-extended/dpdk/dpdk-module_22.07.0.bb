@@ -2,7 +2,7 @@ include dpdk.inc
 
 FILESEXTRAPATHS:prepend := "${THISDIR}/dpdk:"
 
-SRC_URI = "git://dpdk.org/dpdk;branch=${BRANCH};protocol=https \
+SRC_URI = "git://dpdk.org/git/dpdk;branch=${BRANCH};protocol=https \
             file://0001-Makefile-add-makefile.patch \
 "
 
