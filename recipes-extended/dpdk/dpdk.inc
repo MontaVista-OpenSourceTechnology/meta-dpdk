@@ -5,7 +5,7 @@ STABLE ?= ""
 BRANCH ?= "master"
 S = "${WORKDIR}/git"
 
-PR .= ".1"
+PR .= ".2"
 
 SRC_URI = "git://dpdk.org/dpdk${STABLE};branch=${BRANCH} \
 	   file://dpdk-16.04-add-RTE_KERNELDIR_OUT-to-split-kernel-bu.patch \
@@ -13,6 +13,7 @@ SRC_URI = "git://dpdk.org/dpdk${STABLE};branch=${BRANCH} \
 	   file://dpdk-16.07-dpdk-fix-for-parellel-make-issue.patch \
 	   file://dpdk-17.02-dpdk-fix-installation-warning-and-issue.patch \
            file://CVE-2020-10723.patch \
+           file://CVE-2022-0669.patch \
           "
 
 # A machine needs to enable this using:
