@@ -14,6 +14,7 @@ SRC_URI = "git://dpdk.org/dpdk${STABLE};branch=${BRANCH} \
 	   file://dpdk-17.02-dpdk-fix-installation-warning-and-issue.patch \
            file://CVE-2020-10723.patch \
            file://CVE-2022-0669.patch \
+           file://0001-dpdk-failed-to-build-with-vhost_user.c-error.patch \
           "
 
 # A machine needs to enable this using:
