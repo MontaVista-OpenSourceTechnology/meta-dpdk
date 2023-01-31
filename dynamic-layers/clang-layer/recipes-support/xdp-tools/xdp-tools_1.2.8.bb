@@ -21,7 +21,7 @@ S = "${WORKDIR}/git"
 
 inherit pkgconfig
 
-EXTRA_OEMAKE += "PREFIX=${D}${prefix}"
+EXTRA_OEMAKE += "PREFIX=${D}${prefix} LIBDIR=${D}${libdir}"
 
 export STAGING_INCDIR
 
