@@ -21,13 +21,11 @@ S = "${WORKDIR}/git"
 
 inherit pkgconfig
 
-EXTRA_OEMAKE += "PREFIX=${D}${prefix} LIBDIR=${D}${libdir}"
+EXTRA_OEMAKE += "PREFIX=${D}${prefix} LIBDIR=${D}${libdir} BUILD_STATIC_ONLY=1 PRODUCTION=1"
+
+CFLAGS += "-fPIC"
 
 export STAGING_INCDIR
-
-do_configure:prepend () {
-    export DYNAMIC_LIBXDP=1
-}
 
 do_install () {
     oe_runmake install
