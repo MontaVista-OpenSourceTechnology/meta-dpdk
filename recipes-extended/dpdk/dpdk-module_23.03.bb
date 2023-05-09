@@ -7,7 +7,7 @@ SRC_URI = "git://dpdk.org/git/dpdk;branch=${BRANCH};protocol=https \
 "
 
 BRANCH = "releases"
-SRCREV = "4fceceed5b5e9fbf04acffd66239c79d81e79260"
+SRCREV = "189c02f5ec891ed02927062e124e8ca03adf74e7"
 S = "${WORKDIR}/git"
 
 inherit module
