@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://igb_uio.c;beginline=1;endline=4;md5=a05cd72f85021e22f
 SRC_URI = "git://dpdk.org/git/dpdk-kmods;protocol=https;branch=main \
            file://0001-support-5.18-kernel-ABI.patch;patchdir=../.. \
            "
-SRCREV = "4a589f7bed00fc7009c93d430bd214ac7ad2bb6b"
+SRCREV = "e721c733cd24206399bebb8f0751b0387c4c1595"
 
 S = "${WORKDIR}/git/linux/igb_uio"
 
