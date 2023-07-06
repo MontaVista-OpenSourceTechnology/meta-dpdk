@@ -6,7 +6,7 @@ SRC_URI += " \
 
 STABLE = "-stable"
 BRANCH = "21.11"
-SRCREV = "31608e4db56893c896375288671b5ee38723a211"
+SRCREV = "e185150c2ada84e637d14274ec456a3a4965487e"
 S = "${WORKDIR}/git"
 
 # CVE-2021-3839 has been fixed by commit 4c40d30d2b in 21.11.1
