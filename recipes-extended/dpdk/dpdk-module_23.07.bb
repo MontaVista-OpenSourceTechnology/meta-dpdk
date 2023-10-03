@@ -7,7 +7,7 @@ SRC_URI = "git://dpdk.org/git/dpdk;branch=${BRANCH};protocol=https \
 "
 
 BRANCH = "releases"
-SRCREV = "189c02f5ec891ed02927062e124e8ca03adf74e7"
+SRCREV = "12fcafcd62286933e6b167b14856d21f642efa5f"
 S = "${WORKDIR}/git"
 
 inherit module
@@ -48,11 +48,3 @@ do_install() {
                ${MODULES_INSTALL_TARGET}
 }
 
-# CVE-2021-3839 has been fixed by commit 4c40d30d2b in 21.11.1
-# NVD database is incomplete
-# CVE-2022-0669 has been fixed by commit 6cb68162e4 in 21.11.1
-# NVD database is incomplete
-CVE_CHECK_IGNORE += "\
-    CVE-2021-3839 \
-    CVE-2022-0669 \
-"
