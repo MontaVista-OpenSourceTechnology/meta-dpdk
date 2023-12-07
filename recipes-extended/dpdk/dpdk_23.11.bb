@@ -1,17 +1,18 @@
 include dpdk.inc
 
-SRC_URI = "git://dpdk.org/git/dpdk;branch=${BRANCH};protocol=https \
-           file://0001-meson.build-march-and-mcpu-already-passed-by-Yocto-21.11.patch \
-"
+SRC_URI += " file://0001-config-meson-get-cpu_instruction_set-from-meson-opti.patch "
 
-BRANCH = "releases"
-SRCREV = "12fcafcd62286933e6b167b14856d21f642efa5f"
+STABLE = "-stable"
+BRANCH = "23.11"
+SRCREV = "eeb0605f118dae66e80faa44f7b3e88748032353"
 S = "${WORKDIR}/git"
 
-# kernel module is provide by dpdk-module recipe, so disable here
-EXTRA_OEMESON = " -Denable_kmods=false \
-                -Dexamples=all \
-"
+def get_cpu_instruction_set(bb, d):
+    import re
+    march = re.search(r'-march=([^\s]*)', d.getVar('CC')).group(1)
+    return march
+
+EXTRA_OEMESON = " -Dexamples=all -Dcpu_instruction_set=${@get_cpu_instruction_set(bb, d)} "
 
 COMPATIBLE_MACHINE = "null"
 COMPATIBLE_HOST:libc-musl:class-target = "null"
