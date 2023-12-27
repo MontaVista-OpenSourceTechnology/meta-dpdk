@@ -9,8 +9,11 @@ S = "${WORKDIR}/git"
 
 def get_cpu_instruction_set(bb, d):
     import re
-    march = re.search(r'-march=([^\s]*)', d.getVar('CC')).group(1)
-    return march
+    march = re.search(r'-march=([^\s]*)', d.getVar('CC'))
+    if march:
+        return march.group(1)
+    else:
+        return "core2"
 
 EXTRA_OEMESON = " -Dexamples=all -Dcpu_instruction_set=${@get_cpu_instruction_set(bb, d)} "
 
