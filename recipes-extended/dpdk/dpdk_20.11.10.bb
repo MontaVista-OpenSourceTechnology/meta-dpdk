@@ -6,7 +6,7 @@ SRC_URI += " \
 
 STABLE = "-stable"
 BRANCH = "20.11"
-SRCREV = "348875aab1c014ed1b913cf8976b5f8e009a1ebb"
+SRCREV = "d69724b1dcc69784bcef00b96597469b7f6e6207"
 S = "${WORKDIR}/git"
 
 # kernel module is provide by dpdk-module recipe, so disable here
