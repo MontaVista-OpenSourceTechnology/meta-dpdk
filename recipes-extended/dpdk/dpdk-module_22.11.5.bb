@@ -6,8 +6,8 @@ SRC_URI += " \
             file://0001-Makefile-add-makefile.patch \
 "
 STABLE = "-stable"
-BRANCH = "21.11"
-SRCREV = "4e50ad4469f7c037e32de5aa3535d1cd25de0741"
+BRANCH = "22.11"
+SRCREV = "dbd8f39c7c0fc66dfb49d2c6459bba20545c45d8"
 S = "${WORKDIR}/git"
 
 inherit module

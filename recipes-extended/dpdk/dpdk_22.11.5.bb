@@ -5,8 +5,8 @@ SRC_URI += " \
 "
 
 STABLE = "-stable"
-BRANCH = "21.11"
-SRCREV = "4e50ad4469f7c037e32de5aa3535d1cd25de0741"
+BRANCH = "22.11"
+SRCREV = "dbd8f39c7c0fc66dfb49d2c6459bba20545c45d8"
 S = "${WORKDIR}/git"
 
 # CVE-2021-3839 has been fixed by commit 4c40d30d2b in 21.11.1
@@ -59,7 +59,7 @@ PACKAGES =+ "${PN}-examples ${PN}-tools"
 FILES:${PN} += " ${bindir}/dpdk-testpmd \
 		 ${bindir}/dpdk-proc-info \
 		 ${libdir}/*.so* \
-		 ${libdir}/dpdk/pmds-22.0/*.so* \
+		 ${libdir}/dpdk/pmds-23.0/*.so* \
 		 "
 FILES:${PN}-examples = " \
 	${prefix}/share/dpdk/examples/* \
