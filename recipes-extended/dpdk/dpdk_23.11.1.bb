@@ -4,7 +4,7 @@ SRC_URI += " file://0001-config-meson-get-cpu_instruction_set-from-meson-opti.pa
 
 STABLE = "-stable"
 BRANCH = "23.11"
-SRCREV = "eeb0605f118dae66e80faa44f7b3e88748032353"
+SRCREV = "a6ec5765cf83d3d58cbd6d4ed5b92b4a06f8a808"
 S = "${WORKDIR}/git"
 
 def get_cpu_instruction_set(bb, d):
@@ -53,7 +53,7 @@ PACKAGES =+ "${PN}-examples ${PN}-tools"
 FILES:${PN} += " ${bindir}/dpdk-testpmd \
 		 ${bindir}/dpdk-proc-info \
 		 ${libdir}/*.so* \
-		 ${libdir}/dpdk/pmds-22.0/*.so* \
+		 ${libdir}/dpdk/pmds-24.0/*.so* \
 		 "
 FILES:${PN}-examples = " \
 	${prefix}/share/dpdk/examples/* \
