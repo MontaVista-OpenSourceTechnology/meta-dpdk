@@ -1,6 +1,8 @@
 include dpdk.inc
 
-SRC_URI += " file://0001-config-meson-get-cpu_instruction_set-from-meson-opti.patch "
+SRC_URI += " file://0001-config-meson-get-cpu_instruction_set-from-meson-opti.patch \
+             file://CVE-2024-11614.patch \
+           "
 
 STABLE = "-stable"
 BRANCH = "23.11"
